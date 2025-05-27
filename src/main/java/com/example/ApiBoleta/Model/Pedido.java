@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +20,6 @@ import lombok.NoArgsConstructor;
 public class Pedido {
 
     //Atributos
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pedido_id")
@@ -36,7 +33,7 @@ public class Pedido {
 
     @Column(name = "estado", nullable = false, length = 30)
     private String estado;
-    //Relacion Entidad/Clase
+    
 
 
 

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.ApiBoleta.Model.Boleta;
 
 @Repository
-public interface BoletaRepository extends JpaRepository<Integer, Boleta>{
+public interface BoletaRepository extends JpaRepository<Boleta, Integer>{
 
 }

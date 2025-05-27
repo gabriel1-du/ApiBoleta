@@ -54,6 +54,11 @@ public class Boleta {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
+    public void setId(Integer boletaId2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
+
     
 
 
