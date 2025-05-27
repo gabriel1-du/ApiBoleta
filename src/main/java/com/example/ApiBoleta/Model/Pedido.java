@@ -17,11 +17,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Pedido")
+@Table(name = "pedido")
 @Data
 public class Pedido {
 
     //Atributos
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pedido_id")
@@ -35,21 +36,11 @@ public class Pedido {
 
     @Column(name = "estado", nullable = false, length = 30)
     private String estado;
-
     //Relacion Entidad/Clase
 
-    //Relacion con la clase boleta
-    @OneToMany 
-    @JoinColumn(name = "boleta", nullable = false)
-    private Boleta boleta;
-
-    
-
-    
 
 
-
-     
+    //Relacion con la clase boleta no necesario
     
 
 }

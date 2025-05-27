@@ -1,11 +1,14 @@
 package com.example.ApiBoleta.Model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,8 +38,8 @@ public class Usuario {
 
 
     //Relaciones con otras Entidades/Clases
-    @JoinColumn(name = "boleta", nullable = false)
-    private Boleta boleta;
+    @OneToMany(mappedBy = "usuario") // Si en Boleta usas objeto Usuario
+    private List<Boleta> boletas;
 
     
 }

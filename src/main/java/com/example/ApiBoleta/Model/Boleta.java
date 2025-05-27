@@ -29,17 +29,17 @@ public class Boleta {
     @Column(name = "boleta_id")
     private Integer boletaId;
 
-    @Column(name = "subtotal", nullable = false, length =  13)
+    @Column(name = "subtotal", nullable = false)
     private Integer subtotal;
 
-    @Column(name = "impuesto", nullable = false, length = 13)
+    @Column(name = "impuesto", nullable = false)
     private Integer impuesto;
 
-    @Column(name = "total", nullable = false, length = 13)
+    @Column(name = "total", nullable = false)
     private Integer total;
 
     @Column(name = "fecha_emision", nullable = false)
-    private LocalDateTime fecha_emision;
+    private LocalDateTime fechaEmision;
 
 
 
@@ -50,8 +50,9 @@ public class Boleta {
     private Pedido pedido;
 
     //Relacion con la clase usuario
-    @Column(name = "usuario_id", nullable = false)
-    private Integer usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     
 
