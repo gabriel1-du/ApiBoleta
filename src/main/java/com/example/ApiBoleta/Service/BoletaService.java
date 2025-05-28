@@ -43,7 +43,7 @@ public class BoletaService {
     //ACTUALIZAR una BOLETA existente
     public Boleta update(Integer boletaId, Boleta boleta) {
         if (boletaRepository.existsById(boletaId)) {
-            boleta.setId(boletaId); // Aseguramos que se use el mismo ID
+            boleta.setBoletaId(boletaId); // Aseguramos que se use el mismo ID
             return boletaRepository.save(boleta); // Guarda los cambios
         }
         return null; // No se encontró pedido
@@ -60,6 +60,7 @@ public class BoletaService {
         return null; // No existe El pedido
     }//opcional : Averiguar
 
-}
+} 
 
-    
+
+     

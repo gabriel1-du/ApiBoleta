@@ -2,6 +2,10 @@ package com.example.ApiBoleta.Model;
 
 import java.util.List;
 
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +42,7 @@ public class Usuario {
 
     //Relaciones con otras Entidades/Clases
     @OneToMany(mappedBy = "usuario") // Si en Boleta usas objeto Usuario
+    @JsonManagedReference //Para evitar bucles en los get
     private List<Boleta> boletas;
 
     

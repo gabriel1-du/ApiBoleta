@@ -2,6 +2,7 @@ package com.example.ApiBoleta.Model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,13 +53,10 @@ public class Boleta {
     //Relacion con la clase usuario
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnore //Para evitar el bucle
     private Usuario usuario;
 
-    public void setId(Integer boletaId2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
-    }
-
+ 
     
 
 
