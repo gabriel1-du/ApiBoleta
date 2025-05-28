@@ -2,7 +2,6 @@ package com.example.ApiBoleta.Model;
 
 import java.util.List;
 
-import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
