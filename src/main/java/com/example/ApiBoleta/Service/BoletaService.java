@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.ApiBoleta.DTO.BoletaResponseDTO;
 import com.example.ApiBoleta.Model.Boleta;
 import com.example.ApiBoleta.Repository.BoletaRepository;
 
@@ -17,49 +18,76 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BoletaService {
 
-    //Inyecciion del repositorio
+        // Inyección del repositorio
     @Autowired
     private BoletaRepository boletaRepository;
 
+    // =============================
+    // MÉTODOS ENTIDAD BOLETA
+    // =============================
 
-    //Obtener todas las boletas de la base de datos
-    public List<Boleta> getall(){
+    // Obtener todas las boletas
+    public List<Boleta> getAll() {
         return boletaRepository.findAll();
     }
 
-    
-    //Buscar por id la boleta
+    // Buscar boleta por ID
     public Boleta getById(Integer boletaId) {
-        Optional<Boleta> boleta = boletaRepository.findById(boletaId); // Busca por ID
-        return boleta.orElse(null); // Si no la encuentra, retorna null
+        Optional<Boleta> boleta = boletaRepository.findById(boletaId);
+        return boleta.orElse(null);
     }
 
-    //Crear una boleta
-    public Boleta add(Boleta boleta) {
-        return boletaRepository.save(boleta);
-    }
-
-
-    //ACTUALIZAR una BOLETA existente
+    // Actualizar una boleta existente
     public Boleta update(Integer boletaId, Boleta boleta) {
         if (boletaRepository.existsById(boletaId)) {
-            boleta.setBoletaId(boletaId); // Aseguramos que se use el mismo ID
-            return boletaRepository.save(boleta); // Guarda los cambios
+            boleta.setBoletaId(boletaId); // Asegurar el ID
+            return boletaRepository.save(boleta);
         }
-        return null; // No se encontró pedido
-    }//opcional : Averiguar como dejar un mensaje escrito 
+        return null;
+    }
 
-    
-    //Eliminar una tabla
-    public Boleta delete(Integer boletaId){
+    // Eliminar una boleta
+    public Boleta delete(Integer boletaId) {
         Optional<Boleta> boleta = boletaRepository.findById(boletaId);
         if (boleta.isPresent()) {
-            boletaRepository.deleteById(boletaId); // Elimina la PEDIDO
-            return boleta.get(); // Retorna PEDIDO eliminada
+            boletaRepository.deleteById(boletaId);
+            return boleta.get();
         }
-        return null; // No existe El pedido
-    }//opcional : Averiguar
+        return null;
+    }
 
+    // =============================
+    // MÉTODOS CONVERSIÓN DTO
+    // =============================
+
+    // Crear boleta y devolver DTO
+    public BoletaResponseDTO add(Boleta boleta) {
+        Boleta nueva = boletaRepository.save(boleta);
+        return convertToDTO(nueva);
+    }
+
+    // Convertir entidad Boleta a BoletaResponseDTO
+    public BoletaResponseDTO convertToDTO(Boleta boleta) {
+        BoletaResponseDTO dto = new BoletaResponseDTO();
+        dto.setBoletaId(boleta.getBoletaId());
+        dto.setSubtotal(boleta.getSubtotal());
+        dto.setImpuesto(boleta.getImpuesto());
+        dto.setTotal(boleta.getTotal());
+        dto.setFechaEmision(boleta.getFechaEmision());
+
+        if (boleta.getPedido() != null) {
+            dto.setPedidoId(boleta.getPedido().getId());
+        }
+
+        if (boleta.getUsuario() != null) {
+            dto.setUsuarioId(boleta.getUsuario().getId());
+            dto.setNombreUsuario(boleta.getUsuario().getNombre());
+            dto.setApellidoUsuario(boleta.getUsuario().getApellido());
+            dto.setEmailUsuario(boleta.getUsuario().getEmail());
+        }
+
+        return dto;
+    }
 } 
 
 

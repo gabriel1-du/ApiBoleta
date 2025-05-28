@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.ApiBoleta.DTO.BoletaResponseDTO;
 import com.example.ApiBoleta.Model.Boleta;
 import com.example.ApiBoleta.Service.BoletaService;
 
@@ -27,7 +29,7 @@ public class BoletaController {
     //Para obtener todas las boletas
     @GetMapping("/")
     public ResponseEntity<List<Boleta>> getAll(){
-        return ResponseEntity.ok(boletaService.getall());
+        return ResponseEntity.ok(boletaService.getAll());
     }
 
 
@@ -43,11 +45,11 @@ public class BoletaController {
     }
 
 
-    //Crear un pedido
-    @PostMapping
-    public ResponseEntity<?> add(@RequestBody Boleta boleta) {
-        Boleta nuevo = boletaService.add(boleta);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+    //Crear un pedido CON DTO
+     @PostMapping
+    public ResponseEntity<BoletaResponseDTO> add(@RequestBody Boleta boleta) {
+        BoletaResponseDTO dto = boletaService.add(boleta);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     //Actualizar una boleta ya existente

@@ -3,8 +3,9 @@ package com.example.ApiBoleta.DTO;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoletaResponseDTO {
@@ -18,4 +19,6 @@ public class BoletaResponseDTO {
     private Integer pedidoId;
     private Integer usuarioId;
     private String nombreUsuario;
+    private String apellidoUsuario;
+    private String emailUsuario;
 }
