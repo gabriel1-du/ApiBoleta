@@ -120,6 +120,34 @@ public class BoletaService {
         Boleta nueva = boletaRepository.save(boleta);
         return convertToDTO(nueva);
     }
+
+    //Metodo para actualizar una boleta
+    public Boleta update(Integer boletaId, BoletaRequestDTO dto) {
+        Optional<Boleta> optionalBoleta = boletaRepository.findById(boletaId);
+        if (optionalBoleta.isPresent()) {
+            Boleta boleta = optionalBoleta.get();
+            boleta.setSubtotal(dto.getSubtotal());
+            boleta.setImpuesto(dto.getImpuesto());
+            boleta.setTotal(dto.getTotal());
+            boleta.setFechaEmision(dto.getFechaEmision());
+
+        // Cargar entidades relacionadas por ID
+        Pedido pedido = pedidoRepository.findById(dto.getPedidoId()).orElse(null);
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId()).orElse(null);
+
+        if (pedido == null || usuario == null) return null;
+
+        boleta.setPedido(pedido);
+        boleta.setUsuario(usuario);
+
+        return boletaRepository.save(boleta);
+    }
+    return null;
+}
+
+
+        
+
 } 
 
 

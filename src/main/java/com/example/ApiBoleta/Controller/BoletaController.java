@@ -53,16 +53,18 @@ public class BoletaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
-    //Actualizar una boleta ya existente
+    //Actualizar una boleta ya existente con DTO
     @PutMapping("/{boletaId}")
-    public ResponseEntity<?> update(@PathVariable Integer boletaId, @RequestBody Boleta boleta) {
-        Boleta actualizado = boletaService.update(boletaId, boleta);
+    public ResponseEntity<?> update(@PathVariable Integer boletaId, @RequestBody BoletaRequestDTO dto) {
+        Boleta actualizado = boletaService.update(boletaId, dto);
         if (actualizado != null) {
-            return ResponseEntity.ok(actualizado);
+            BoletaResponseDTO responseDTO = boletaService.convertToDTO(actualizado);
+            return ResponseEntity.ok(responseDTO);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Boleta no encontrado para actualizar");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Boleta no encontrada para actualizar");
         }
     }
+
 
     //Eliminar una boleta
     @DeleteMapping("/{boletaId}")
